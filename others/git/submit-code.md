@@ -26,7 +26,7 @@ upstream    https://github.com/iissnan/hexo-theme-next.git (push)
 2、同步fork，从大仓 fetch 分支和提交点，传送到本地，并会被存储在一个本地分支 upstream/master
 
 ```
-➜  next git:(master) git fetch upstream From https://github.com/iissnan/hexo-theme-next
+ ➜  next git:(master) git fetch upstream //会拉去全部分支，也可以指定分支
  * [new branch]      dev        -&gt; upstream/dev
  * [new branch]      master     -&gt; upstream/master
  * [new branch]      pisces     -&gt; upstream/pisces
