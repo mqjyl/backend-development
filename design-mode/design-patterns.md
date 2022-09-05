@@ -1,6 +1,6 @@
 # 设计模式
 
-## ✏ 设计原则
+## :pencil2: 设计原则
 
 ### 1、依赖倒置原则（DIP）
 
@@ -57,7 +57,7 @@
 
 面向接口设计：产业强盛的标志：接口标准化！
 
-## ✏ 模式分类
+## :pencil2: 模式分类
 
 从目的来看：
 
@@ -70,7 +70,9 @@
 * 类模式处理类与子类的静态关系
 * 对象模式处理对象间的动态关系
 
-## ✏ 重构
+![](broken-reference)
+
+## :pencil2: 重构
 
 重构获得模式：Refactoring to Patterns
 
@@ -80,13 +82,13 @@
 
 重构关键技法：
 
-* 静态-&gt;动态
-* 早绑定-&gt;晚绑定
-* 继承-&gt;组合
-* 编译时依赖-&gt;运行时依赖
-* 紧耦合-&gt;松耦合
+* 静态->动态
+* 早绑定->晚绑定
+* 继承->组合
+* 编译时依赖->运行时依赖
+* 紧耦合->松耦合
 
-## ✏ 资料
+## :pencil2: 资料
 
 书籍：
 
@@ -96,6 +98,5 @@
 
 网站：
 
-* [http://c.biancheng.net/design\_pattern/](http://c.biancheng.net/design_pattern/)
+* [http://c.biancheng.net/design\_pattern/](http://c.biancheng.net/design\_pattern/)
 * [https://www.bilibili.com/video/BV1c4411a7wk](https://www.bilibili.com/video/BV1c4411a7wk)
-

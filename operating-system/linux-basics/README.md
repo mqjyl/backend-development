@@ -1,30 +1,30 @@
 # Linux
 
-## ✏ 1、Linux系统层次
+## :pencil2: 1、Linux系统层次
 
 Linux系统一般有4个主要部分：**内核、shell、文件系统和应用程序**。内核、shell和文件系统一起形成了基本的操作系统结构，它们使得用户可以运行程序、管理文件并使用系统。部分层次结构如图所示：
 
 ![](../../.gitbook/assets/4.png)
 
-### 🖋 1.1、Linux内核
+### :pen\_fountain: 1.1、Linux内核
 
 内核是操作系统的核心，具有很多最基本功能，它负责管理系统的进程、内存、设备驱动程序、文件和网络系统，决定着系统的性能和稳定性。
 
-### 🖋 1.2、shell
+### :pen\_fountain: 1.2、shell
 
 shell是系统的用户界面，提供了用户与内核进行交互操作的一种接口。它接收用户输入的命令并把它送入内核去执行，是一个命令解释器。 另外，shell编程语言具有普通编程语言的很多特点，用这种编程语言编写的shell程序与其他应用程序具有同样的效果。
 
-### 🖋 1.3、文件系统
+### :pen\_fountain: 1.3、文件系统
 
 文件系统是文件存放在磁盘等存储设备上的组织方法。Linux系统能支持多种目前流行的文件系统，如`EXT2`、`EXT3`、`FAT`、`FAT32`、`VFAT`和`ISO9660`。
 
-### 🖋 1.4、应用程序
+### :pen\_fountain: 1.4、应用程序
 
 标准的Linux系统一般都有一套称为应用程序的程序集，它包括文本编辑器、编程语言、`XWindow`、办公套件、Internet工具和数据库等。
 
-## ✏ 2、内核层次
+## :pencil2: 2、内核层次
 
-Linux 内核由如下几部分组成： 
+Linux 内核由如下几部分组成：&#x20;
 
 1. Process Scheduler，也称作进程管理、进程调度。负责管理CPU资源，以便让各个进程可以以尽量公平的方式访问CPU。
 2. `IPC（Inter-Process Communication）`，进程间通信。`IPC`不管理任何的硬件，它主要负责Linux系统中进程之间的通信
@@ -32,34 +32,34 @@ Linux 内核由如下几部分组成：
 4. `VFS（Virtual File System）`，虚拟文件系统。Linux内核将不同功能的外部设备，例如Disk设备（硬盘、磁盘、`NAND Flash`、Nor Flash等）、输入输出设备、显示设备等等，抽象为可以通过统一的文件操作接口（open、close、read、write等）来访问。这就是Linux系统“一切皆是文件”的体现（其实Linux做的并不彻底，因为CPU、内存、网络等还不是文件）。
 5. Network，网络子系统。负责管理系统的网络设备，并实现多种多样的网络标准。
 
-![](../../.gitbook/assets/image%20%2810%29.png)
+![](<../../.gitbook/assets/image (10).png>)
 
-### 🖋 2.1、**进程调度（Process Scheduler\)**
+### :pen\_fountain: 2.1、**进程调度（Process Scheduler)**
 
 进程调度是Linux内核中最重要的子系统，它主要提供对CPU的访问控制。因为在计算机中，CPU资源是有限的，而众多的应用程序都要使用CPU资源，所以需要“进程调度子系统”对CPU进行调度管理。
 
 进程调度子系统包括4个子模块（见下图），它们的功能如下：
 
-![](../../.gitbook/assets/image%20%2815%29.png)
+![](<../../.gitbook/assets/image (15).png>)
 
 1. Scheduling Policy，实现进程调度的策略，它决定哪个（或哪几个）进程将拥有CPU。
 2. Architecture-specific Schedulers，体系结构相关的部分，用于将对不同CPU的控制，抽象为统一的接口。这些控制主要在suspend和resume进程时使用，牵涉到CPU的寄存器访问、汇编指令操作等。
 3. Architecture-independent Scheduler，体系结构无关的部分。它会和“Scheduling Policy模块”沟通，决定接下来要执行哪个进程，然后通过“Architecture-specific Schedulers模块”resume指定的进程。
 4. System Call Interface，系统调用接口。进程调度子系统通过系统调用接口，将需要提供给用户空间的接口开放出去，同时屏蔽掉不需要用户空间程序关心的细节。
 
-### 🖋 2.2、**内存管理（MM\)**
+### :pen\_fountain: 2.2、**内存管理（MM)**
 
 内存管理同样是Linux内核中最重要的子系统，它主要提供对内存资源的访问控制。Linux系统会在硬件物理内存和进程所使用的内存（称作虚拟内存）之间建立一种映射关系，这种映射是以进程为单位，因而不同的进程可以使用相同的虚拟内存，而这些相同的虚拟内存，可以映射到不同的物理内存上。
 
 内存管理子系统包括3个子模块（见下图），它们的功能如下：
 
-![](../../.gitbook/assets/image%20%2814%29.png)
+![](<../../.gitbook/assets/image (14).png>)
 
 1. Architecture Specific Managers，体系结构相关部分。提供用于访问硬件Memory的虚拟接口。
 2. Architecture Independent Manager，体系结构无关部分。提供所有的内存管理机制，包括：以进程为单位的memory mapping；虚拟内存的Swapping。
 3. System Call Interface，系统调用接口。通过该接口，向用户空间程序应用程序提供内存的分配、释放，文件的map等功能。
 
-### 🖋 2.3、**虚拟文件系统（VFS）**
+### :pen\_fountain: 2.3、**虚拟文件系统（VFS）**
 
 传统意义上的文件系统，是一种存储和组织计算机数据的方法。它用易懂、人性化的方法（文件和目录结构），抽象计算机磁盘、硬盘等设备上冰冷的数据块，从而使对它们的查找和访问变得容易。因而文件系统的实质，就是“存储和组织数据的方法”，文件系统的表现形式，就是“从某个设备中读取数据和向某个设备写入数据”。
 
@@ -69,7 +69,7 @@ Linux 内核由如下几部分组成：
 
 VFS子系统包括6个子模块（见下图），它们的功能如下：
 
-![](../../.gitbook/assets/image%20%2813%29.png)
+![](<../../.gitbook/assets/image (13).png>)
 
 1. Device Drivers，设备驱动，用于控制所有的外部设备及控制器。由于存在大量不能相互兼容的硬件设备（特别是嵌入式产品），所以也有非常多的设备驱动。因此，Linux内核中将近一半的Source Code都是设备驱动，大多数的Linux底层工程师（特别是国内的企业）都是在编写或者维护设备驱动，而无暇估计其它内容（它们恰恰是Linux内核的精髓所在）。
 2. Device Independent Interface， 该模块定义了描述硬件设备的统一方式（统一设备模型），所有的设备驱动都遵守这个定义，可以降低开发的难度。同时可以用一致的形势向上提供接口。
@@ -77,19 +77,19 @@ VFS子系统包括6个子模块（见下图），它们的功能如下：
 4. System Independent Interface，该模块负责以统一的接口（快设备和字符设备）表示硬件设备和逻辑文件系统，这样上层软件就不再关心具体的硬件形态了。
 5. System Call Interface，系统调用接口，向用户空间提供访问文件系统和硬件设备的统一的接口。
 
-### 🖋 2.4、**网络子系统（Net）**
+### :pen\_fountain: 2.4、**网络子系统（Net）**
 
 网络子系统在Linux内核中主要负责管理各种网络设备，并实现各种网络协议栈，最终实现通过网络连接其它系统的功能。在Linux内核中，网络子系统几乎是自成体系，它包括5个子模块（见下图），它们的功能如下：
 
-![](../../.gitbook/assets/image%20%2812%29.png)
+![](<../../.gitbook/assets/image (12).png>)
 
 1. Network Device Drivers，网络设备的驱动，和`VFS`子系统中的设备驱动是一样的。
 2. Device Independent Interface，和`VFS`子系统中的是一样的。
 3. Network Protocols，实现各种网络传输协议，例如IP**，**TCP，UDP等等。
-4. Protocol Independent Interface，屏蔽不同的硬件设备和网络协议，以相同的格式提供接口（socket\)。
+4. Protocol Independent Interface，屏蔽不同的硬件设备和网络协议，以相同的格式提供接口（socket)。
 5. System Call interface，系统调用接口，向用户空间提供访问网络设备的统一的接口。
 
-## ✏ 3、认识`POSIX`系统
+## :pencil2: 3、认识`POSIX`系统
 
 符合POSIX的系统信号处理总结：
 
@@ -97,4 +97,3 @@ VFS子系统包括6个子模块（见下图），它们的功能如下：
 2. 在一个信号处理函数执行期间，正被递交的信号是堵塞的。
 3. 假设一个信号在被堵塞期间产生了一次或多次，那么该信号被解堵塞之后通常仅仅递交一次，也就是说Unix信号缺省是不排队的。
 4. 利用sigprocmask函数选择性地堵塞或解堵塞一组信号是可能的。这使得我们能够做到在一段临界区代码运行期间，防止捕获某些信号。以此保护这段代码。
-

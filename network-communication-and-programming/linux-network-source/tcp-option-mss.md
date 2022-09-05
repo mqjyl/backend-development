@@ -1,15 +1,15 @@
 # TCP选项之MSS
 
-## \*\*\*\*✏ **1、三次握手**
+## ****:pencil2: **1、三次握手**
 
-### \*\*\*\*🖋 **1.1、客户端三次握手**
+### ****:pen\_fountain: **1.1、客户端三次握手**
 
 客户端处理`MSS`的机会为：
 
 1. 发送SYN段时告诉服务器端本端能够接收的`MSS`；
 2. 收到`SYN+ACK`后接收服务器端通告的`MSS`。
 
-#### 🐹 **1.1.1、**SYN段MSS选项值
+#### :hamster: **1.1.1、**SYN段MSS选项值
 
 SYN段也是通过`tcp_transmit_skb()`发送的，在该函数中会调用`tcp_syn_build_options()`构造SYN段携带的选项，代码如下：
 
@@ -77,7 +77,7 @@ static void tcp_connect_init(struct sock *sk)
 
 **SYN段中携带的`MSS`选项值实际上就是本端网络设备的`MTU-40`。**
 
-#### 🐹 **1.1.2、**接收SYN+ACK段
+#### :hamster: **1.1.2、**接收SYN+ACK段
 
 接收`SYN+ACK`段是在`tcp_rcv_synsent_state_process()`中处理的，其中会调用`tcp_paser_option()`解析SYN段中携带的选项，其中和`MSS`选项相关的代码如下：
 
@@ -109,14 +109,14 @@ void tcp_parse_options(struct sk_buff *skb, struct tcp_options_received *opt_rx,
 
 总结：客户端在收到服务器端通告的`MSS`后，将其与应用程序通过`TCP_MAXSEG`设定的`MSS`值比较，将二者中的较小值保存在`tp->rx_opt.mss_clamp`中，该值会影响到客户端发送`MSS`的确定。
 
-### 🖋 1.2、服务端三次握手
+### :pen\_fountain: 1.2、服务端三次握手
 
 服务器端处理`MSS`的机会为：
 
 1. 收到SYN段后对客户端通告的`MSS`的处理；
 2. 发送`SYN+ACK`时携带的`MSS`选项值的确定；
 
-#### 🐹 1.2.1、接收SYN段
+#### :hamster: 1.2.1、接收SYN段
 
 SYN段的核心处理在`tcp_v4_conn_request()`中完成的，其中和`MSS`选项解析相关的内容如下：
 
@@ -168,7 +168,7 @@ struct sock *tcp_create_openreq_child(struct sock *sk, struct request_sock *req,
 
 从代码上看，其实服务器端接收到SYN后，对`MSS`选项的处理流程与客户端收到`SYN+ACK`段后对`MSS`选项的处理流程是相同的。
 
-#### 🐹 1.2.2、发送SYN+ACK段
+#### :hamster: 1.2.2、发送SYN+ACK段
 
 `SYN+ACK`段的发送过程主要由`tcp_v4_send_synack()`完成，其中和`MSS`选项相关的内容如下：
 
@@ -203,7 +203,7 @@ struct sk_buff *tcp_make_synack(struct sock *sk, struct dst_entry *dst,
 
 从代码上看，其实服务器端发送`SYN+ACK`段时，对`MSS`选项的处理流程与客户端发送SYN段时对`MSS`选项的处理流程是相同的。
 
-#### 🐹 1.2.3、收到ACK段
+#### :hamster: 1.2.3、收到ACK段
 
 在上面，我们并没有看到服务器端对`tp->advmss`的初始化，实际上，这个过程是在收到握手的第三个`ACK`报文后执行的，代码如下：
 
@@ -219,13 +219,13 @@ struct sock *tcp_v4_syn_recv_sock(struct sock *sk, struct sk_buff *skb,
 }
 ```
 
-### 🖋 1.3、三次握手总结
+### :pen\_fountain: 1.3、三次握手总结
 
 从前面的代码中可以看到，无论是服务器端还是客户端，它们对通告给对端的`MSS`值的选择方式是一样的，都是取自本地网卡的`MTU-40`，该值会被记录在`tp->advmss`中；收到对端通告的`MSS`后，和应用程序设定的`tp->rx_opt.user_mss`比较后，取二者中的较小者保存在`tp->rx_opt.mss_clamp`中，`mss_clamp`会影响发送过程中发送`MSS`的选择。
 
-## ✏ 2、发送过程中获取MSS
+## :pencil2: 2、发送过程中获取MSS
 
- 在[TCP数据发送之`tcp_sendmsg()`](tcp-send-tcp_sendmsg.md)中有看到，`tcp_sendmsg()`的核心逻辑就是根据`MSS`将待发送数据切割成一个个的`skb`，过程中是通过调用`tcp_current_mss()`确定当前的发送`MSS`的。这篇笔记前面有提到，对端通告的`MSS`经过矫正后最终保存在了`tp->rx_opt.mss_clamp`中，按道理我们使用该值作为发送`MSS`就很好，然而并非如此简单，如下：
+&#x20;在[TCP数据发送之`tcp_sendmsg()`](tcp-send-tcp\_sendmsg.md)中有看到，`tcp_sendmsg()`的核心逻辑就是根据`MSS`将待发送数据切割成一个个的`skb`，过程中是通过调用`tcp_current_mss()`确定当前的发送`MSS`的。这篇笔记前面有提到，对端通告的`MSS`经过矫正后最终保存在了`tp->rx_opt.mss_clamp`中，按道理我们使用该值作为发送`MSS`就很好，然而并非如此简单，如下：
 
 ```cpp
 int tcp_sendmsg(struct kiocb *iocb, struct socket *sock, struct msghdr *msg,
@@ -397,9 +397,8 @@ int tcp_mtu_to_mss(struct sock *sk, int pmtu)
 
 实际上在三次握手过程中，`TCP`会多次调用`tcp_sync_mss()`更新`MSS`值，不过其原理相同，无非是根据设备`MTU`或者当前最新的`PMTU`更新。
 
-## ✏ 3、总结
+## :pencil2: 3、总结
 
 ![](../../.gitbook/assets/100.png)
 
 `MSS`的更新规则：`PMTU`会更新到路由`metrics[RTAX_MTU]`中，每次发送操作时，都会重新检查是否需要更新发送`MSS`，此时会首先检查路由中的`MSS`和`icsk_pmtu_cookie`中缓存的上一次`PMTU`值，如果二者不等，说明两次发送期间`MTU`发生了变化，这时会用路由`MSS`更新`icsk_pmtu_cookie`。然后决定最终的发送`MSS`时也会参考三次握手过程中协商的值`mss_clamp`，保证最终值不会超过该值，而`mss_clamp`又受限于`TCP`选项`TCP_MAXSEG`。
-

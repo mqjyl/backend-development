@@ -1,14 +1,14 @@
 # 幂等性
 
-## \*\*\*\*✏ 1、**幂等性定义**
+## ****:pencil2: 1、**幂等性定义**
 
 在HTTP/1.1规范中幂等性的定义是：
 
-> Methods can also have the property of “idempotence” in that \(aside from error or expiration issues\) the side-effects of N &gt; 0 identical requests is the same as for a single request.
+> Methods can also have the property of “idempotence” in that (aside from error or expiration issues) the side-effects of N > 0 identical requests is the same as for a single request.
 
 从定义上看，HTTP方法的幂等性是指一次和多次请求某一个资源应该具有同样的副作用。幂等性属于语义范畴，正如编译器只能帮助检查语法错误一样，HTTP规范也没有办法通过消息格式等语法手段来定义它，这可能是它不太受到重视的原因之一。但实际上，幂等性是分布式系统设计中十分重要的概念，而HTTP的分布式本质也决定了它在HTTP中具有重要地位。
 
-## \*\*\*\*✏ 2、**分布式事务 vs 幂等设计**
+## ****:pencil2: 2、**分布式事务 vs 幂等设计**
 
 为什么需要幂等性呢？我们先从一个例子说起，假设有一个从账户取钱的远程API（可以是HTTP的，也可以不是），我们暂时用类函数的方式记为
 
@@ -31,13 +31,13 @@ bool idempotent_withdraw(ticket_id, account_id, amount);
 
 create\_ticket的语义是获取一个服务器端生成的唯一的处理号ticket\_id，它将用于标识后续的操作。idempotent\_withdraw和withdraw的区别在于关联了一个ticket\_id，一个ticket\_id表示的操作至多只会被处理一次，每次调用都将返回第一次调用时的处理结果。这样，idempotent\_withdraw就符合幂等性了，客户端就可以放心地多次调用。
 
-基于幂等性的解决方案中一个完整的取钱流程被分解成了两个步骤：1.调用create\_ticket\(\)获取ticket\_id；2.调用idempotent\_withdraw\(ticket\_id, account\_id, amount\)。虽然create\_ticket不是幂等的，但在这种设计下，它对系统状态的影响可以忽略，加上idempotent\_withdraw是幂等的，所以任何一步由于网络等原因失败或超时，客户端都可以重试，直到获得结果。如图所示：
+基于幂等性的解决方案中一个完整的取钱流程被分解成了两个步骤：1.调用create\_ticket()获取ticket\_id；2.调用idempotent\_withdraw(ticket\_id, account\_id, amount)。虽然create\_ticket不是幂等的，但在这种设计下，它对系统状态的影响可以忽略，加上idempotent\_withdraw是幂等的，所以任何一步由于网络等原因失败或超时，客户端都可以重试，直到获得结果。如图所示：
 
 ![](../../.gitbook/assets/89.png)
 
 和分布式事务相比，幂等设计的优势在于它的轻量级，容易适应异构环境，以及性能和可用性方面。在某些性能要求比较高的应用，幂等设计往往是唯一的选择。
 
-## \*\*\*\*✏ 3、**HTTP的幂等性**
+## ****:pencil2: 3、**HTTP的幂等性**
 
 HTTP协议本身是一种面向资源的应用层协议，但对HTTP协议的使用实际上存在着两种不同的方式：一种是`RESTful`的，它把HTTP当成应用层协议，比较忠实地遵守了HTTP协议的各种规定；另一种是`SOA`的，它并没有完全把HTTP当成应用层协议，而是把HTTP协议作为了传输层协议，然后在HTTP之上建立了自己的应用层协议。本文所讨论的HTTP幂等性主要针对`RESTful`风格的，不过正如上一节所看到的那样，幂等性并不属于特点的协议，它是分布式系统的一种特性；所以，不论是`SOA`还是`RESTful`的Web API设计都应该考虑幂等性。下面将介绍HTTP GET、DELETE、PUT、POST四种主要方法的语义和幂等性。
 
@@ -47,7 +47,7 @@ HTTP协议本身是一种面向资源的应用层协议，但对HTTP协议的使
 
 比较容易混淆的是HTTP POST和PUT。POST和PUT的区别容易被简单地误认为“POST表示创建资源，PUT表示更新资源”；而实际上，二者均可用于创建资源，更为本质的差别是在幂等性方面。在HTTP规范中对POST和PUT是这样定义的：
 
-> The POST method is used to request that the origin server accept the entity enclosed in the request as a new subordinate of the resource identified by the Request-URI in the Request-Line. …… If a resource has been created on the origin server, the response SHOULD be 201 \(Created\) and contain an entity which describes the status of the request and refers to the new resource, and a Location header.
+> The POST method is used to request that the origin server accept the entity enclosed in the request as a new subordinate of the resource identified by the Request-URI in the Request-Line. …… If a resource has been created on the origin server, the response SHOULD be 201 (Created) and contain an entity which describes the status of the request and refers to the new resource, and a Location header.
 >
 > The PUT method requests that the enclosed entity be stored under the supplied Request-URI. If the Request-URI refers to an already existing resource, the enclosed entity SHOULD be considered as a modified version of the one residing on the origin server. If the Request-URI does not point to an existing resource, and that URI is capable of being defined as a new resource by the requesting user agent, the origin server can create the resource with that URI.
 
@@ -66,4 +66,3 @@ PATCH   /tickets/12    # 更新ticket 12
 ```
 
 此时，我们服务端对方法的处理是，当调用一次方法，更新部分字段，将这条ticket记录的操作记录加一，这次，每次调用的资源是不是变了呢，所以它是有可能是非幂等的操作。
-

@@ -1,27 +1,27 @@
 # 启动与停止
 
-## ✏ 1、启动 <a id="1&#x542F;&#x52A8;"></a>
+## :pencil2: 1、启动 <a href="#1-qi-dong" id="1-qi-dong"></a>
 
-### 🖋 1.1、启动命令 <a id="11&#x542F;&#x52A8;&#x547D;&#x4EE4;"></a>
+### :pen\_fountain: 1.1、启动命令 <a href="#11-qi-dong-ming-ling" id="11-qi-dong-ming-ling"></a>
 
-```text
+```
 # 前台启动
 mongod --dbpathD:\workspace\mongodb\data
 # 后台启动
 mongod -dbpath=/usr/local/mongodb/data --fork --port 27017 --logpath=/usr/local/mongodb/log/work.log --logappend --auth
 ```
 
-### 🖋 1.2、注册为服务 <a id="12&#x6CE8;&#x518C;&#x4E3A;&#x670D;&#x52A1;"></a>
+### :pen\_fountain: 1.2、注册为服务 <a href="#12-zhu-ce-wei-fu-wu" id="12-zhu-ce-wei-fu-wu"></a>
 
-```text
+```
 mongod --logpath "D:\workspace\mongodb\log\mongodb.log" --logappend--dbpath "D:\workspace\mongodb\data" --port 27017 --serviceName "mongodbService"--serviceDisplayName "mongodbService" --installmongo
 ```
 
-### 🖋 1.3、`Mongod`命令参数 <a id="13mongod&#x547D;&#x4EE4;&#x53C2;&#x6570;"></a>
+### :pen\_fountain: 1.3、`Mongod`命令参数 <a href="#13mongod-ming-ling-can-shu" id="13mongod-ming-ling-can-shu"></a>
 
 #### 1.基本配置
 
-```text
+```
 --quiet           # 安静输出
 --port arg        # 指定服务端口号，默认端口27017
 --bind_ip arg     # 绑定服务IP，若绑定127.0.0.1，则只能本机访问，不指定默认本地所有IP
@@ -64,7 +64,7 @@ mongod --logpath "D:\workspace\mongodb\log\mongodb.log" --logappend--dbpath "D:\
 
 #### 2.`Replicaton` 参数
 
-```text
+```
 --fastsync      # 从一个dbpath里启用从库复制服务，该dbpath的数据库是主库的快照，可用于快速启用同步
 --autoresync    # 如果从库与主库同步数据差得多，自动重新同步
 --oplogSize arg # 设置oplog的大小(MB)
@@ -72,7 +72,7 @@ mongod --logpath "D:\workspace\mongodb\log\mongodb.log" --logappend--dbpath "D:\
 
 #### 3.主/从参数
 
-```text
+```
 --master            # 主库模式
 --slave             # 从库模式
 --source arg        # 从库 端口号
@@ -80,23 +80,23 @@ mongod --logpath "D:\workspace\mongodb\log\mongodb.log" --logappend--dbpath "D:\
 --slavedelay arg    # 设置从库同步主库的延迟时间
 ```
 
-#### 4.Replica set\(副本集\)选项：
+#### 4.Replica set(副本集)选项：
 
-```text
+```
 --replSet arg       # 设置副本集名称
 ```
 
-#### 5.`Sharding`\(分片\)选项
+#### 5.`Sharding`(分片)选项
 
-```text
+```
 --configsvr         # 声明这是一个集群的config服务,默认端口27019，默认目录/data/configdb
 --shardsvr          # 声明这是一个集群的分片,默认端口27018
 --noMoveParanoia    # 关闭偏执为moveChunk数据保存
 ```
 
-### 🖋 1.4、启动方式 <a id="14&#x542F;&#x52A8;&#x65B9;&#x5F0F;"></a>
+### :pen\_fountain: 1.4、启动方式 <a href="#14-qi-dong-fang-shi" id="14-qi-dong-fang-shi"></a>
 
-#### 1.4.1、基于命令行方式启动`mongodb` <a id="141&#x57FA;&#x4E8E;&#x547D;&#x4EE4;&#x884C;&#x65B9;&#x5F0F;&#x542F;&#x52A8;mongodb"></a>
+#### 1.4.1、基于命令行方式启动`mongodb` <a href="#141-ji-yu-ming-ling-hang-fang-shi-qi-dong-mongodb" id="141-ji-yu-ming-ling-hang-fang-shi-qi-dong-mongodb"></a>
 
 ```bash
 # mongod --dbpath=/data/mongodata/rs1 --logpath=/data/mongodata/rs1/rs1.log &
@@ -106,7 +106,7 @@ mongod --logpath "D:\workspace\mongodb\log\mongodb.log" --logappend--dbpath "D:\
 tcp        0      0 0.0.0.0:27017       0.0.0.0:*       LISTEN      5062/mongod 
 ```
 
-#### 1.4.2、基于配置文件的命令行启动 <a id="142&#x57FA;&#x4E8E;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x7684;&#x547D;&#x4EE4;&#x884C;&#x542F;&#x52A8;"></a>
+#### 1.4.2、基于配置文件的命令行启动 <a href="#142-ji-yu-pei-zhi-wen-jian-de-ming-ling-hang-qi-dong" id="142-ji-yu-pei-zhi-wen-jian-de-ming-ling-hang-qi-dong"></a>
 
 ```bash
 vi /var/lib/mongodb/conf/rs2.conf
@@ -127,7 +127,7 @@ pidfilepath = /var/run/mongo.pid
 tcp        0      0 0.0.0.0:27000       0.0.0.0:*       LISTEN      5356/mongod    
 ```
 
-#### 1.4.3、以守护进程方式启动`mongodb` <a id="143&#x4EE5;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;&#x65B9;&#x5F0F;&#x542F;&#x52A8;mongodb"></a>
+#### 1.4.3、以守护进程方式启动`mongodb` <a href="#143-yi-shou-hu-jin-cheng-fang-shi-qi-dong-mongodb" id="143-yi-shou-hu-jin-cheng-fang-shi-qi-dong-mongodb"></a>
 
 ```bash
 # mongod --dbpath=/data/mongodata/rs3 --logpath=/data/mongodata/rs1/rs3.log --fork --port 28000
@@ -138,7 +138,7 @@ tcp        0      0 0.0.0.0:27017           0.0.0.0:*       LISTEN      5435/mon
 tcp        0      0 0.0.0.0:27000           0.0.0.0:*       LISTEN      5448/mongod
 ```
 
-#### 1.4.4、使用系统服务的方式启动`mogodb` <a id="144&#x4F7F;&#x7528;&#x7CFB;&#x7EDF;&#x670D;&#x52A1;&#x7684;&#x65B9;&#x5F0F;&#x542F;&#x52A8;mogodb"></a>
+#### 1.4.4、使用系统服务的方式启动`mogodb` <a href="#144-shi-yong-xi-tong-fu-wu-de-fang-shi-qi-dong-mogodb" id="144-shi-yong-xi-tong-fu-wu-de-fang-shi-qi-dong-mogodb"></a>
 
 ```bash
 # 启动脚本
@@ -231,11 +231,11 @@ child process started successfully, parent exiting
 Starting mongodb:                                          [  OK  ]
 ```
 
-## ✏ 2、停止 <a id="2&#x505C;&#x6B62;"></a>
+## :pencil2: 2、停止 <a href="#2-ting-zhi" id="2-ting-zhi"></a>
 
-### 🖋 2.1、停止方式 <a id="21&#x505C;&#x6B62;&#x65B9;&#x5F0F;"></a>
+### :pen\_fountain: 2.1、停止方式 <a href="#21-ting-zhi-fang-shi" id="21-ting-zhi-fang-shi"></a>
 
-#### 2.1.1、向`mongod`进程发送信号 <a id="211&#x5411;mongod&#x8FDB;&#x7A0B;&#x53D1;&#x9001;&#x4FE1;&#x53F7;"></a>
+#### 2.1.1、向`mongod`进程发送信号 <a href="#211-xiang-mongod-jin-cheng-fa-song-xin-hao" id="211-xiang-mongod-jin-cheng-fa-song-xin-hao"></a>
 
 ```bash
 ###SIGINT信号
@@ -292,7 +292,7 @@ sigterm只有当前进程收到信号，子进程不会收到。如果当前进�
 安全停止
 ```
 
-#### 2.1.2、使用系统服务脚本方式停止`mongod` <a id="212&#x4F7F;&#x7528;&#x7CFB;&#x7EDF;&#x670D;&#x52A1;&#x811A;&#x672C;&#x65B9;&#x5F0F;&#x505C;&#x6B62;mongod"></a>
+#### 2.1.2、使用系统服务脚本方式停止`mongod` <a href="#212-shi-yong-xi-tong-fu-wu-jiao-ben-fang-shi-ting-zhi-mongod" id="212-shi-yong-xi-tong-fu-wu-jiao-ben-fang-shi-ting-zhi-mongod"></a>
 
 ```bash
 # ps -ef|grep mongod
@@ -303,7 +303,7 @@ root       5689   4950  0 19:33 pts/3    00:00:00 grep mongod
 Stopping mongodb:                                          [  OK  ]
 ```
 
-#### 2.1.3、`db.shutdownServer()`方式 <a id="213dbshutdownserver&#x65B9;&#x5F0F;"></a>
+#### 2.1.3、`db.shutdownServer()`方式 <a href="#213dbshutdownserver-fang-shi" id="213dbshutdownserver-fang-shi"></a>
 
 ```bash
 # mongo localhost:27000
@@ -311,13 +311,13 @@ Stopping mongodb:                                          [  OK  ]
 > db.shutdownServer()
 ```
 
-#### 2.1.4、使用命令行方式关闭\(补充@20160901\) <a id="214&#x4F7F;&#x7528;&#x547D;&#x4EE4;&#x884C;&#x65B9;&#x5F0F;&#x5173;&#x95ED;&#x8865;&#x5145;20160901"></a>
+#### 2.1.4、使用命令行方式关闭(补充@20160901) <a href="#214-shi-yong-ming-ling-hang-fang-shi-guan-bi-bu-chong-20160901" id="214-shi-yong-ming-ling-hang-fang-shi-guan-bi-bu-chong-20160901"></a>
 
 ```bash
 # mongod -f /etc/mongo-m.conf  --shutdown
 ```
 
-#### 2.1.5、强制关闭`mongod` <a id="215&#x5F3A;&#x5236;&#x5173;&#x95ED;mongod"></a>
+#### 2.1.5、强制关闭`mongod` <a href="#215-qiang-zhi-guan-bi-mongod" id="215-qiang-zhi-guan-bi-mongod"></a>
 
 ```bash
 # kill -9 5675
@@ -327,4 +327,3 @@ Stopping mongodb:                                          [  OK  ]
 数据丢失
 数据文件容易损坏(需要进行修复)
 ```
-

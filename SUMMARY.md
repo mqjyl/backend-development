@@ -2,7 +2,7 @@
 
 * [Introduce](README.md)
 
-## 操作系统和Linux <a href="operating-system" id="operating-system"></a>
+## 操作系统和Linux <a href="#operating-system" id="operating-system"></a>
 
 * [操作系统基础](operating-system/operating-system-basics/README.md)
   * [进程](operating-system/operating-system-basics/process.md)
@@ -40,10 +40,8 @@
   * [Linux堆内存管理](operating-system/linux-system-programming/heap-memory-management.md)
   * [pthread库](operating-system/linux-system-programming/pthread-lib.md)
 * [Shell编程](operating-system/shell-programming.md)
-* [Kafka](operating-system/kafka.md)
-* [ZeroMQ](operating-system/zeromq-message-queue.md)
 
-## 网络通信与网络编程 <a href="network-communication-and-programming" id="network-communication-and-programming"></a>
+## 网络通信与网络编程 <a href="#network-communication-and-programming" id="network-communication-and-programming"></a>
 
 * [计算机网络](network-communication-and-programming/computer-network/README.md)
   * [应用层其他协议](network-communication-and-programming/computer-network/protocol-application-layer.md)
@@ -74,7 +72,7 @@
 * [Wireshark](network-communication-and-programming/wireshark.md)
 * [Libevent](network-communication-and-programming/libevent.md)
 
-## 数据库 <a href="database" id="database"></a>
+## 数据库 <a href="#database" id="database"></a>
 
 * [数据库相关概念](database/database-concept.md)
 * [关系数据库设计范式](database/relational-database-normal-form.md)
@@ -106,12 +104,12 @@
   * [查询](database/mongodb/select.md)
 * [Memcached](database/memcached.md)
 
-## 组成原理和体系结构 <a href="computer-composition" id="computer-composition"></a>
+## 组成原理和体系结构 <a href="#computer-composition" id="computer-composition"></a>
 
 * [定点数 & 浮点数 & 内存](computer-composition/fixed-floating-point-number.md)
 * [体系结构](computer-composition/architecture.md)
 
-## 编译和调试 <a href="compile-and-debug" id="compile-and-debug"></a>
+## 编译和调试 <a href="#compile-and-debug" id="compile-and-debug"></a>
 
 * [编译原理](compile-and-debug/compilers.md)
 * [Gdb调试](compile-and-debug/gdb-debug.md)
@@ -123,12 +121,12 @@
 * [C++单元测试](compile-and-debug/unit-test.md)
 * [单元测试之Google Test](compile-and-debug/google-test.md)
 
-## 设计模式 <a href="design-mode" id="design-mode"></a>
+## 设计模式 <a href="#design-mode" id="design-mode"></a>
 
 * [设计模式](design-mode/design-patterns.md)
 * [“组件协作”模式](design-mode/component-collaboration.md)
 
-## 其他 <a href="others" id="others"></a>
+## 其他 <a href="#others" id="others"></a>
 
 * [正则表达式](others/regular-expression/README.md)
   * [基本正则表达式](others/regular-expression/basic-regular-expression.md)
@@ -142,7 +140,7 @@
 * [无锁技术](others/no-lock.md)
 * [面试中的“锁”](others/locks.md)
 
-## 面试题 <a href="interview-question" id="interview-question"></a>
+## 面试题 <a href="#interview-question" id="interview-question"></a>
 
 * [计算机网络面试题](interview-question/net-interview-question.md)
 * [操作系统面试题](interview-question/os-interview-questions.md)
